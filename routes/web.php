@@ -19,3 +19,12 @@ Route::get('/laptop', [LaptopController::class,'index']);
 
 // routes/web.php
 Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+//route for shop
+Route::get('/shop', function () {
+    return view('shop');
+})->name('shop');
+
