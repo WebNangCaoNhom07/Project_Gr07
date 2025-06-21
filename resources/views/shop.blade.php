@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>eElectronics - HTML eCommerce Template</title>
+    <title>QuanHoangLaptop</title>
     
     <!-- Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
@@ -78,7 +78,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="logo">
-                        <h1><a href="index.html">e<span>Electronics</span></a></h1>
+                        <h1><a href="index.html"><span>QHLatop</span></a></h1>
                     </div>
                 </div>
                 
@@ -135,22 +135,32 @@
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
-    @foreach ($products as $product)
-    <div class="col-md-3 col-sm-6">
-        <div class="single-shop-product">
-            <div class="product-upper">
-                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+                @foreach ($products as $product)
+            <div class="col-md-3 col-sm-6">
+                <div class="single-shop-product">
+                    <div class="product-upper">
+                        <a href="{{ route('product.show', $product->id) }}">
+                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+                        </a>
+                    </div>
+
+                    <h2>
+                        <a href="{{ route('product.show', $product->id) }}">
+                            {{ $product->name }}
+                        </a>
+                    </h2>
+
+                    <div class="product-carousel-price">
+                        <ins>${{ number_format($product->price, 2) }}</ins>
+                    </div>  
+
+                    <div class="product-option-shop">
+                        <a class="add_to_cart_button" href="#">Add to cart</a>
+                    </div>                       
+                </div>
             </div>
-            <h2><a href="#">{{ $product->name }}</a></h2>
-            <div class="product-carousel-price">
-                <ins>${{ number_format($product->price, 2) }}</ins>
-            </div>  
-            <div class="product-option-shop">
-                <a class="add_to_cart_button" href="#">Add to cart</a>
-            </div>                       
-        </div>
-    </div>
-    @endforeach
+            @endforeach
+
 </div>
 
             <div class="row">
