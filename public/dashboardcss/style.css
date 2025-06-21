@@ -341,6 +341,10 @@ z-index: 9;
 
 .product-carousel {
   padding-top: 40px;
+  display: flex;
+  gap: 15px; /* Khoảng cách giữa các sản phẩm */
+  justify-content: space-between; /* Dàn đều */
+
 }
 .latest-product .owl-nav {
   position: absolute;
