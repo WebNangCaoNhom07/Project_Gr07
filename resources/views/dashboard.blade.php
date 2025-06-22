@@ -53,7 +53,8 @@
                             <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
                             <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
                             <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                        
+                            <li><a href="checkout.html"><i class="fa fa-user"></i> For Admin</a></li>
+
                         </ul>
                     </div>
                 </div>
