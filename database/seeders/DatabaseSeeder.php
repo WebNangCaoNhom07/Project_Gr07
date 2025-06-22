@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // ➕ Thêm seeder sản phẩm ở đây
+        $this->call(AdminUserSeeder::class);
+
         $this->call([
             ProductSeeder::class,
         ]);
