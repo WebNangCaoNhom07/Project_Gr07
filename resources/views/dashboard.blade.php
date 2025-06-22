@@ -37,23 +37,12 @@
                 <div class="col-md-8">
                     <div class="user-menu">
                         <ul>
-                            <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> My Account <b class="caret"></b></a>
-    <ul class="dropdown-menu">
-        <li><a href="{{ route('profile.edit') }}">Profile</a></li>
-        <li>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="btn btn-link" style="padding: 3px 20px; display: block; width: 100%; text-align: left;">Logout</button>
-            </form>
-        </li>
-    </ul>
-</li>
-
+                            <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
                             <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
                             <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
                             <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                            <li><a href="checkout.html"><i class="fa fa-user"></i> For Admin</a></li>
+                            <li><a href="{{ route('admin.page') }}"><i class="fa fa-user"></i> For Admin</a></li>
+
 
                         </ul>
                     </div>
