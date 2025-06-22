@@ -1,24 +1,20 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\ShopController;
-use App\Http\Controllers\CartController;
+
 Route::get('/', function () {
     return view('welcome');
 });
-Route::view('/about', 'about')->name('about');
 
-Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-//single product route
-Route::get('/product/{id}', [ShopController::class, 'show'])->name('product.show');
-
-//cart routes
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
-Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
-Route::get('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
-
+require __DIR__.'/auth.php';
