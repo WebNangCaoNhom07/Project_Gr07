@@ -22,14 +22,30 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
+    public function store(Request $request): RedirectResponse
+{
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
 
-        $request->session()->regenerate();
-
-        return redirect()->intended(route('dashboard', absolute: false));
+    if (! Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
+        return back()->withErrors([
+            'email' => 'Thông tin đăng nhập không đúng.',
+        ]);
     }
+
+    $request->session()->regenerate();
+
+    $user = Auth::user();
+
+    if ($user->role === 'admin') {
+        return redirect('/admin/dashboard');
+    }
+
+    return redirect('/dashboard');
+}
+
 
     /**
      * Destroy an authenticated session.
@@ -42,6 +58,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login')->with('status', 'Đăng xuất thành công.');
     }
 }
