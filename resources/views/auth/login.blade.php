@@ -1,47 +1,91 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Đăng nhập | QHLaptop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <form method="POST" action="{{ route('login') }}">
+    <!-- CSS -->
+    <link href="{{ asset('/backend/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/backend/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ asset('/backend/css/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('/backend/css/style.css') }}" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+  <div class="middle-box text-center loginscreen animated fadeInDown">
+    <div>
+      <h1 class="logo-name">QH+</h1>
+      <h3>Chào mừng trở lại</h3>
+      <p>Đăng nhập để tiếp tục sử dụng hệ thống</p>
+
+      <form class="m-t" role="form" method="POST" action="{{ route('login') }}">
         @csrf
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        {{-- Email --}}
+        <div class="form-group">
+          <input
+            id="email"
+            type="email"
+            name="email"
+            value="{{ old('email') }}"
+            required
+            autofocus
+            class="form-control @error('email') is-invalid @enderror"
+            placeholder="Email">
+          @error('email')
+            <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
+          @enderror
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        {{-- Password --}}
+        <div class="form-group">
+          <input
+            id="password"
+            type="password"
+            name="password"
+            required
+            class="form-control @error('password') is-invalid @enderror"
+            placeholder="Mật khẩu">
+          @error('password')
+            <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
+          @enderror
         </div>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+        {{-- Remember Me --}}
+        <div class="form-group">
+          <div class="checkbox i-checks">
+            <label>
+              <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+              <i></i> Ghi nhớ đăng nhập
             </label>
+          </div>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
+        {{-- Submit --}}
+        <button type="submit" class="btn btn-primary block full-width m-b">Đăng nhập</button>
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+        {{-- Forgot Password --}}
+        @if (Route::has('password.request'))
+          <a href="{{ route('password.request') }}"><small>Quên mật khẩu?</small></a>
+        @endif
+
+        <p class="text-muted text-center"><small>Chưa có tài khoản?</small></p>
+        <a class="btn btn-sm btn-white btn-block" href="{{ route('register') }}">Đăng ký mới</a>
+      </form>
+
+      <p class="m-t"> 
+        <small>&copy; 2025 QHLaptop. All rights reserved.</small> 
+      </p>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="{{ asset('/backend/js/jquery-3.1.1.min.js') }}"></script>
+  <script src="{{ asset('/backend/js/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('/backend/js/jquery.metisMenu.js') }}"></script>
+  <script src="{{ asset('/backend/js/jquery.slimscroll.min.js') }}"></script>
+  <script src="{{ asset('/backend/js/inspinia.js') }}"></script>
+  <script src="{{ asset('/backend/js/pace.min.js') }}"></script>
+</body>
+</html>
