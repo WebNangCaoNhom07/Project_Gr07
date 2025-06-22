@@ -5,18 +5,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProductController;
-
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return redirect('/login');
 });
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
-
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard'); // resources/views/dashboard.blade.php
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 });
 
 Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
