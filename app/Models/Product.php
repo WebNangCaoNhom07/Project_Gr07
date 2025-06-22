@@ -10,4 +10,18 @@ class Product extends Model
 {
     //
     use HasFactory;
+    protected $fillable = [
+    'product_name',
+    'selling_price',
+    'actual_price',
+    'average_rating',
+    'rating_and_review',
+    'ram',
+    'ssd',
+    'processor',
+    'operating_system',
+    'exchange_offer',
+    'display_size',
+];
+
 }

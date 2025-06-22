@@ -9,10 +9,13 @@ class ShopController extends Controller
 {
     public function index()
     {
-        $products = Product::all(); // Lấy tất cả sản phẩm từ database
-        return view('shop', compact('products')); // Gửi dữ liệu sang view shop.blade.php
+        // Lấy 20 sản phẩm mỗi trang
+        $products = Product::paginate(12);
+        // Trả về view 'shop' (shop.blade.php) và truyền biến $products
+        return view('shop', compact('products'));
     }
 
+    
     public function show($id)
     {
         $product = Product::findOrFail($id);

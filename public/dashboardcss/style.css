@@ -1002,8 +1002,32 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     margin-top: 15px;
 }
 
-.single-shop-product {margin-bottom: 50px}
+.single-shop-product {
+    margin-bottom: 50px;
+}
 
 .pagination > li > a, .pagination > li > span {
   color: #1abc9c;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.col-md-3, .col-sm-6 {
+    display: flex;
+    flex-direction: column;
+}
+
+.single-shop-product {
+    flex: 1 1 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 500px; /* hoặc giá trị phù hợp với giao diện của bạn */
+    background: #111; /* tuỳ chỉnh nếu muốn */
+    margin-bottom: 20px;
+    border-radius: 8px;
+    padding: 15px;
 }

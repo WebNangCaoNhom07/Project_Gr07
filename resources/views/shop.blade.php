@@ -131,66 +131,59 @@
     </div>
     
     
-    <div class="single-product-area">
-        <div class="zigzag-bottom"></div>
-        <div class="container">
-            <div class="row">
-                @foreach ($products as $product)
-            <div class="col-md-3 col-sm-6">
-                <div class="single-shop-product">
-                    <div class="product-upper">
-                        <a href="{{ route('product.show', $product->id) }}">
-                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
-                        </a>
+    {{-- filepath: resources/views/shop.blade.php --}}
+<div class="single-product-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            @foreach ($products as $product)
+                <div class="col-md-3 col-sm-6">
+                    <div class="single-shop-product">
+                        <div class="product-upper">
+                            <a href="{{ route('product.show', $product->id) }}">
+                                <img src="{{ asset('storage/' . ($product->image ?? 'default.png')) }}" alt="{{ $product->product_name }}">
+                            </a>
+                        </div>
+
+                        <h2>
+                            <a href="{{ route('product.show', $product->id) }}">
+                                {{ $product->product_name }}
+                            </a>
+                        </h2>
+
+                        <div class="product-carousel-price">
+                            <ins>{{ number_format($product->selling_price, 0) }}$</ins>
+                            <del style="color: #888; margin-left: 10px;">{{ number_format($product->actual_price, 0) }}$</del>
+                        </div>  
+
+                        <ul style="font-size: 13px; margin: 10px 0;">
+                            <li>Đánh giá: {{ $product->average_rating }} ⭐</li>
+                            <li>RAM: {{ $product->ram }}</li>
+                            <li>SSD: {{ $product->ssd }}</li>
+                            <li>CPU: {{ $product->processor }}</li>
+                            <li>HĐH: {{ $product->operating_system }}</li>
+                            <li>Đổi trả: {{ $product->exchange_offer }}</li>
+                            <li>Màn hình: {{ $product->display_size }}</li>
+                        </ul>
+
+                        <div class="product-option-shop">
+                            <a class="add_to_cart_button" href="#">Add to cart</a>
+                        </div>                       
                     </div>
-
-                    <h2>
-                        <a href="{{ route('product.show', $product->id) }}">
-                            {{ $product->name }}
-                        </a>
-                    </h2>
-
-                    <div class="product-carousel-price">
-                        <ins>${{ number_format($product->price, 2) }}</ins>
-                    </div>  
-
-                    <div class="product-option-shop">
-                        <a class="add_to_cart_button" href="#">Add to cart</a>
-                    </div>                       
                 </div>
-            </div>
             @endforeach
-
+        </div>
+        
+    </div>
 </div>
 
             <div class="row">
-                <div class="col-md-12">
-                    <div class="product-pagination text-center">
-                        <nav>
-                          <ul class="pagination">
-                            <li>
-                              <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                              </a>
-                            </li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li>
-                              <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                              </a>
-                            </li>
-                          </ul>
-                        </nav>                        
-                    </div>
-                </div>
-            </div>
+    <div class="col-md-12">
+        <div class="product-pagination text-center">
+            {{ $products->links('pagination::bootstrap-4') }}
         </div>
     </div>
-
+</div>
 
     <div class="footer-top-area">
         <div class="zigzag-bottom"></div>
