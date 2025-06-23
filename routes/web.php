@@ -36,12 +36,12 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
 });
 
-Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
+Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
-        return view('admin.dashboard'); // resources/views/admin/dashboard.blade.php
-    })->name('admin.dashboard');
-    
+        return view('dashboard');
+    })->name('dashboard');
 });
+
 
 Route::middleware('auth')->get('/admin', function () {
     return view('giaodienadmin');
@@ -70,9 +70,14 @@ require __DIR__.'/auth.php';
 
 
 
-
+// Hiển thị giỏ hàng
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+
+// Thêm vào giỏ hàng
 Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+
+// Cập nhật số lượng
 Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+
+// Xoá khỏi giỏ hàng
 Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
-Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');

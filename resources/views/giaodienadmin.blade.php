@@ -88,10 +88,10 @@
 
             <div class="footer">
                 <div class="float-right">
-                    Laravel Admin Template
+                
                 </div>
                 <div>
-                    <strong>Copyright</strong> Your Company &copy; {{ date('Y') }}
+                    
                 </div>
             </div>
         </div>

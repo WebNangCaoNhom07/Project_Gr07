@@ -114,9 +114,9 @@
                 </div> 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="{{ route('dashboard') }}">Home</a></li>
+                        <li class="active"><a href="{{ route('dashboard') }}">Home</a></li>
                         <li><a href="{{ route('shop') }}">Shop page</a></li>
-                        <li><a href="cart.html">Cart</a></li>
+                        <li><a href="{{ route('cart.index') }}">Cart</a></li>
                         <li><a href="checkout.html">Checkout</a></li>
                         <li><a href="#">Category</a></li>
                         
@@ -188,7 +188,37 @@
                                                 <div class="quantity buttons_added">
                                                     <input type="button" class="minus" value="-">
                                                     <input type="number" size="4" class="input-text qty text" title="Qty" value="1" min="0" step="1">
-                                                    <input type="button" class="plus" value="+">
+                                        @foreach ($cart as $id => $item)
+<tr>
+    <td class="product-name">
+        <a href="{{ route('product.show', $id) }}">{{ $item['product_name'] }}</a>
+    </td>
+
+    <td class="product-price">
+        <span class="amount">${{ number_format($item['selling_price'], 2) }}</span> 
+    </td>
+
+    <td class="product-quantity">
+        <form action="{{ route('cart.update', $id) }}" method="POST">
+            @csrf
+            <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="1" style="width: 60px;">
+            <button type="submit" class="btn btn-sm btn-info">Cập nhật</button>
+        </form>
+    </td>
+
+    <td class="product-subtotal">
+        <span class="amount">${{ number_format($item['selling_price'] * $item['quantity'], 2) }}</span> 
+    </td>
+
+    <td>
+        <form action="{{ route('cart.remove', $id) }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-danger btn-sm">Xoá</button>
+        </form>
+    </td>
+</tr>
+@endforeach
+            <input type="button" class="plus" value="+">
                                                 </div>
                                             </td>
 
