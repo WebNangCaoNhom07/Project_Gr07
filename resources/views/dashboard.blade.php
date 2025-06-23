@@ -37,11 +37,23 @@
                 <div class="col-md-8">
                     <div class="user-menu">
                         <ul>
-                            <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
+                            <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> My Account <b class="caret"></b></a>
+    <ul class="dropdown-menu">
+        <li><a href="{{ route('profile.edit') }}">Profile</a></li>
+        <li>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="btn btn-link" style="padding: 3px 20px; display: block; width: 100%; text-align: left;">Logout</button>
+            </form>
+        </li>
+    </ul>
+</li>
                             <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
                             <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
                             <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                            <li><a href="{{ route('admin.page') }}"><i class="fa fa-user"></i> For Admin</a></li>
+                            
+
 
 
                         </ul>
@@ -108,12 +120,15 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="{{ route('dashboard') }}">Home</a></li>
                         <li><a href="{{ route('shop') }}">Shop page</a></li>
-                        <li><a href="single-product.html">Single product</a></li>
-                        <li><a href="cart.html">Cart</a></li>
+                        <li><a href="{{ route('cart.index') }}">Cart</a></li>
                         <li><a href="checkout.html">Checkout</a></li>
                         <li><a href="#">Category</a></li>
-                        <li><a href="#">Others</a></li>
-                        <li><a href="#">Contact</a></li>
+                        
+                        @auth
+                            @if(auth()->user()->role === 'admin')
+                                <li><a href="{{ route('admin.page') }}"><i class="fa fa-user"></i> For Admin</a></li>
+                            @endif
+                            @endauth
                     </ul>
                 </div>  
             </div>

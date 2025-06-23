@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>eElectronics - HTML eCommerce Template</title>
+    <title>QuanHoangLaptop</title>
     
     <!-- Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
@@ -36,12 +36,24 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="user-menu">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
+                        <ul>                            
+                            <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> My Account <b class="caret"></b></a>
+    <ul class="dropdown-menu">
+        <li><a href="{{ route('profile.edit') }}">Profile</a></li>
+        <li>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="btn btn-link" style="padding: 3px 20px; display: block; width: 100%; text-align: left;">Logout</button>
+            </form>
+        </li>
+    </ul>
+</li>
                             <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
                             <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
                             <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                            <li><a href="#"><i class="fa fa-user"></i> Login</a></li>
+                            
+
                         </ul>
                     </div>
                 </div>
@@ -78,7 +90,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="logo">
-                        <h1><a href="index.html">e<span>Electronics</span></a></h1>
+                        <h1><a href="index.html"><span>QHLatop</span></a></h1>
                     </div>
                 </div>
                 
@@ -104,14 +116,16 @@
                 </div> 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="shop.html">Shop page</a></li>
-                        <li class="active"><a href="single-product.html">Single product</a></li>
+                        <li class="active"><a href="{{ route('dashboard') }}">Home</a></li>
+                        <li><a href="{{ route('shop') }}">Shop page</a></li>
                         <li><a href="cart.html">Cart</a></li>
                         <li><a href="checkout.html">Checkout</a></li>
                         <li><a href="#">Category</a></li>
-                        <li><a href="#">Others</a></li>
-                        <li><a href="#">Contact</a></li>
+                        @auth
+                            @if(auth()->user()->role === 'admin')
+                                <li><a href="{{ route('admin.page') }}"><i class="fa fa-user"></i> For Admin</a></li>
+                            @endif
+                            @endauth
                     </ul>
                 </div>  
             </div>
@@ -193,7 +207,8 @@
                         <div class="product-breadcroumb">
                             <a href="">Home</a>
                             <a href="">Category Name</a>
-                            <a href="">Sony Smart TV - 2015</a>
+                            <a href="{{ route('product.show', $product->id) }}">{{ $product->product_name }}</a>
+
                         </div>
                         
                         <div class="row">
@@ -214,10 +229,13 @@
                             
                             <div class="col-sm-6">
                                 <div class="product-inner">
-                                    <h2 class="product-name">Sony Smart TV - 2015</h2>
+                                    <a href="{{ route('product.show', $product->id) }}">{{ $product->product_name }}</a>
+
                                     <div class="product-inner-price">
-                                        <ins>$700.00</ins> <del>$800.00</del>
-                                    </div>    
+                                        <ins>${{ number_format($product->selling_price, 2) }}</ins>
+                                        <del>${{ number_format($product->actual_price, 2) }}</del>
+                                    </div>
+    
                                     
                                     <form action="" class="cart">
                                         <div class="quantity">

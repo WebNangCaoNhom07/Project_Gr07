@@ -118,7 +118,6 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="{{ route('dashboard') }}">Home</a></li>
                         <li><a href="{{ route('shop') }}">Shop page</a></li>
-                        <li class="active"><a href="single-product.html">Single product</a></li>
                         <li><a href="cart.html">Cart</a></li>
                         <li><a href="checkout.html">Checkout</a></li>
                         <li><a href="#">Category</a></li>
@@ -203,6 +202,7 @@
                 <div class="col-md-8">
                     <div class="product-content-right">
                         <div class="product-breadcroumb">
+                            <li class="active"><a href="{{ route('dashboard') }}">Home</a></li>
                             <a href="">Home</a>
                             <a href="">Category Name</a>
                             <a href="">Sony Smart TV - 2015</a>

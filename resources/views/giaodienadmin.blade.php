@@ -53,8 +53,8 @@
                             <li><a href="{{ route('admin.categories.index') }}">Danh mục</a></li>
                             <li><a href="{{ route('admin.orders.index') }}">Đơn hàng</a></li>
                             <li><a href="{{ route('admin.users.index') }}">Người dùng</a></li>
-                            <li><a href="{{ route('admin.reviews.index') }}">Đánh giá</a></li>
                             <li><a href="{{ route('admin.reports.index') }}">Thống kê doanh thu</a></li>
+                            <li><a href="{{ route('dashboard') }}">Home</a></li>
                         </ul>
                     </li>
                 </ul>

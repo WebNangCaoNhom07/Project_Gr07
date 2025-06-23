@@ -1,5 +1,4 @@
-@extends('layouts.app')
-
+@extends('giaodienadmin')
 @section('content')
 <div class="container">
     <h1 class="mb-4">Thêm sản phẩm mới</h1>
