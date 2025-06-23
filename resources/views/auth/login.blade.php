@@ -64,17 +64,6 @@
 
         {{-- Submit --}}
         <button type="submit" class="btn btn-primary block full-width m-b">Đăng nhập</button>
-
-        {{-- Forgot Password --}}
-        @if (Route::has('password.request'))
-          <a href="{{ route('password.request') }}"><small>Quên mật khẩu?</small></a>
-        @endif
-
-        <p class="text-muted text-center"><small>Chưa có tài khoản?</small></p>
-        <a class="btn btn-sm btn-white btn-block" href="{{ route('register') }}">Đăng ký mới</a>
-      </form>
-
-      <p class="m-t"> 
         <small>&copy; 2025 QHLaptop. All rights reserved.</small> 
       </p>
     </div>
